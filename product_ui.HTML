@@ -2,12 +2,22 @@
 <html>
 <body>
 
-<h2>HTML Forms</h2>
+<h2>Products details</h2>
 
 <form action="/action_page.php">
-    <label for="fname">First Name:</label><br>
-    <input type="text" id="fname" name="fname" value="Doe"><br>
-</form>
+  <label for="pname">Product name:</label><br>
+  <input type="text" id="pname" name="pname" value="Table 231JAE12"><br>
+  
+  <label for="theight">Height (cm):</label><br>
+  <input type="text" id="theight" name="theight" value="80"><br><br>
+ 
+  <label for="ttlenght">Top length (cm):</label><br>
+  <input type="text" id="ttlenght" name="ttlenght" value="150"><br><br>
+ 
+  <input type="submit" value="Submit">
+</form> 
+
+<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
 
 </body>
 </html>
