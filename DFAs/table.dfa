@@ -1,0 +1,56 @@
+#! NX/KF 4.0
+DefClass: Table (%ug_create_instance ug_base_part);
+
++
+################################# PARAMETERS #############################################3
+-
+
+    #Origin
+    (Point Parameter) base_origin: Point(0,0,0);
+    (Vector Parameter) base_vector: Vector(0,0,1);
+
+    #Leg parameters
+    (Number Parameter) leg_width: 6; #Insert from python
+    (Number Parameter) leg_height: 15; #Insert from python
+    
+    #Tabletop parameters
+    (Number Parameter) tabletop_height: 5; #Insert from python
+    (Number Parameter) tabletop_length: 10; #Insert from python
+    (Number Parameter) tabletop_width: 10; #Insert from python
+
+    #Leg origins
+    (Vector Parameter) leg_vector: Vector(0,0,-1);
+    (Point Parameter) leg1_
+
+    #Colors
+    (Name) tabletop_color: PALE_DULL_GREEN;
+    (Name) : PALE_DULL_GREEN;
+    (Name) leg_color: PALE_DULL_GREEN;
+
++
+############################### METHODS ###############################
+-
+
+
+
++
+############################### CHILDREN ##############################
+-
+
+(child) tabletop:
+{
+    class, ug_block;
+    length, tabletop_length:;
+    width, tabletop_width:;
+    height, tabletop_height:;
+}
+
+(child) color_tabletop:
+{
+    class, ug_body;
+    feature, {tabletop:};
+    layer, 1;
+    color, ug_askClosestColor(tabletop_color:);
+}
+
+(child) leg_1
