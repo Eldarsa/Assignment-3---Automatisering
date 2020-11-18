@@ -15,7 +15,7 @@ if __name__ == "__main__":
     'INSERT ' + \
     '{ ' + \
     'kbe:table_id a kbe:table. ' + \
-    'kbe:table_id kbe:hasLegHeight "50"^^xsd:float. ' + \
+    'kbe:table_id kbe:hasLegHeight "'+  +'"^^xsd:float. ' + \
     'kbe:table_id kbe:hasLegRadius tableTop. ' + \
     'kbe:table_id kbe:hasDiameter diameter. ' + \
     'kbe:table_id kbe:hasTableTopHeight length. ' + \
@@ -42,6 +42,15 @@ if __name__ == "__main__":
 class kbe_requestor():
 
     def __init__(self, URL):
-        self.URL = URL
+        self.baseURL = URL
 
-    
+    def insert(self, param_dict):
+        URL = baseURL + "/update"
+
+
+        return
+
+    def select(self):
+        URL = baseURL + "/query"
+
+        return param_dict
