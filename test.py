@@ -17,5 +17,10 @@ ttHeight = key_value_dict["ttHeight"]
 legHeight = key_value_dict["legHeight"]
 legDiameter = key_value_dict["legDiameter"]
 
-print(key_value_dict)
-print(legDiameter)
+#print(key_value_dict)
+#print(legDiameter)
+
+template_submarks = ["<*TABLE_TEMPLATE*>", "<*LEG_RADIUS*>", "<*LEG_HEIGHT*>", "<*TT_HEIGHT*>", "<*TT_LENGTH*>", "<*TT_WIDTH*>"]
+element = template_submarks.pop(0)
+print(element)
+print(template_submarks)

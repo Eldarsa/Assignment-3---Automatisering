@@ -1,24 +1,24 @@
 #! NX/KF 4.0
-DefClass: <*TABLE_TEMPLATE*> (%ug_create_instance ug_base_part);
+DefClass: Taaaable (%ug_create_instance ug_base_part);
 
 
 ################################# PARAMETERS #############################################
 
 
-    #Origin
-    (Point Parameter) base_origin: Point(0,0,0);
-    (Vector Parameter) base_vector: Vector(0,0,1);
+#Origin
+(Point Parameter) base_origin: Point(0,0,0);
+(Vector Parameter) base_vector: Vector(0,0,1);
 
-    #Leg parameters
-    (Number Parameter) leg_radius: <*LEG_RADIUS*> ; #Insert from python
-    (Number Parameter) leg_height: <*LEG_HEIGHT*> ; #Insert from python
-    (Number Parameter) legPos_relativeToWidth: leg_radius:*2; #Fixed. Multiply the leg_radus with a factor greater than 1!
-    (Number Parameter) legPos_relativeToLength: leg_radius:*2; #Fixed
-    
-    #Tabletop parameters
-    (Number Parameter) tabletop_height: <*TT_HEIGHT*> ; #Insert from python
-    (Number Parameter) tabletop_length: <*TT_LENGTH*> ; #Insert from python
-    (Number Parameter) tabletop_width: <*TT_WIDTH*> ; #Insert from python
+#Leg parameters
+(Number Parameter) leg_radius: 5.0 ; #Insert from python
+(Number Parameter) leg_height: 50 ; #Insert from python
+(Number Parameter) legPos_relativeToWidth: leg_radius:*2; #Fixed. Multiply the leg_radus with a factor greater than 1!
+(Number Parameter) legPos_relativeToLength: leg_radius:*2; #Fixed
+
+#Tabletop parameters
+(Number Parameter) tabletop_height: 10 ; #Insert from python
+(Number Parameter) tabletop_length: 100 ; #Insert from python
+(Number Parameter) tabletop_width: 50 ; #Insert from python
 
     #Leg origins
     (Vector Parameter) leg_vector: Vector(0,0,-1);
