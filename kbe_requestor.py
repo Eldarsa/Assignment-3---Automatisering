@@ -45,12 +45,14 @@ class kbe_requestor():
         self.baseURL = URL
 
     def insert(self, param_dict):
-        URL = baseURL + "/update"
+        URL = self.baseURL + "/update"
 
+        param_dict
 
         return
 
     def select(self):
-        URL = baseURL + "/query"
+        URL = self.baseURL + "/query"
+        param_dict = dict()
 
         return param_dict
