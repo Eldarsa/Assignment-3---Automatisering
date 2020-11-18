@@ -1,0 +1,142 @@
+#! NX/KF 4.0
+DefClass: <*TABLE_TEMPLATE*> (%ug_create_instance ug_base_part);
+
+
+################################# PARAMETERS #############################################
+
+
+    #Origin
+    (Point Parameter) base_origin: Point(0,0,0);
+    (Vector Parameter) base_vector: Vector(0,0,1);
+
+    #Leg parameters
+    (Number Parameter) leg_radius: <*LEG_RADIUS*> ; #Insert from python
+    (Number Parameter) leg_height: <*LEG_HEIGHT*> ; #Insert from python
+    (Number Parameter) legPos_relativeToWidth: leg_radius:*2; #Fixed. Multiply the leg_radus with a factor greater than 1!
+    (Number Parameter) legPos_relativeToLength: leg_radius:*2; #Fixed
+    
+    #Tabletop parameters
+    (Number Parameter) tabletop_height: <*TT_HEIGHT*> ; #Insert from python
+    (Number Parameter) tabletop_length: <*TT_LENGTH*> ; #Insert from python
+    (Number Parameter) tabletop_width: <*TT_WIDTH*> ; #Insert from python
+
+    #Leg origins
+    (Vector Parameter) leg_vector: Vector(0,0,-1);
+    (Point Parameter) leg1_origin: get_leg1_origin:(tabletop_width:, tabletop_length:, leg_radius:, legPos_relativeToLength:, legPos_relativeToWidth:);
+    (Point Parameter) leg2_origin: get_leg2_origin:(tabletop_width:, tabletop_length:, leg_radius:, legPos_relativeToLength:, legPos_relativeToWidth:);
+    (Point Parameter) leg3_origin: get_leg3_origin:(tabletop_width:, tabletop_length:, leg_radius:, legPos_relativeToLength:, legPos_relativeToWidth:);
+    (Point Parameter) leg4_origin: get_leg4_origin:(tabletop_width:, tabletop_length:, leg_radius:, legPos_relativeToLength:, legPos_relativeToWidth:);
+
+    #Colors
+    (Name) tabletop_color: PALE_DULL_GREEN; #Insert from python
+    (Name) leg_color: PALE_DULL_GREEN; #Insert from python
+
+############################### METHODS ###############################
+
+    (Method Point) get_leg1_origin:(Number $tt_width, Number $tt_length, Number $l_rad, Number $pos_rel_l, Number $pos_rel_w) 
+    @{
+        Point(0 + $pos_rel_l, 0 + $pos_rel_w, 0);
+    };
+
+    (Method Point) get_leg2_origin:(Number $tt_width, Number $tt_length, Number $l_rad, Number $pos_rel_l, Number $pos_rel_w) 
+    @{
+        Point($tt_length - $pos_rel_l, 0 + $pos_rel_w, 0);
+    };
+
+    (Method Point) get_leg3_origin:(Number $tt_width, Number $tt_length, Number $l_rad, Number $pos_rel_l, Number $pos_rel_w) 
+    @{
+        Point($tt_length - $pos_rel_l, $tt_width - $pos_rel_w, 0);
+    };
+
+    (Method Point) get_leg4_origin:(Number $tt_width, Number $tt_length, Number $l_rad, Number $pos_rel_l, Number $pos_rel_w) 
+    @{
+        Point(0 + $pos_rel_l, $tt_width - $pos_rel_w, 0);
+    };
+
+
+############################### CHILDREN ##############################
+
+
+(child) tabletop:
+{
+    class, ug_block;
+    length, tabletop_length:;
+    width, tabletop_width:;
+    height, tabletop_height:;
+};
+
+(child) color_tabletop:
+{
+    class, ug_body;
+    feature, {tabletop:};
+    layer, 1;
+    color, ug_askClosestColor(tabletop_color:);
+};
+
+(child) leg_1:
+{
+    class, ug_cylinder;
+    height, leg_height:;
+    diameter, leg_radius:*2;
+    origin, leg1_origin:;
+    direction, leg_vector:;
+};
+
+(child) leg_2:
+{
+    class, ug_cylinder;
+    height, leg_height:;
+    diameter, leg_radius:*2;
+    origin, leg2_origin:;
+    direction, leg_vector:;
+};
+
+(child) leg_3:
+{
+    class, ug_cylinder;
+    height, leg_height:;
+    diameter, leg_radius:*2;
+    origin, leg3_origin:;
+    direction, leg_vector:;
+};
+
+(child) leg_4:
+{
+    class, ug_cylinder;
+    height, leg_height:;
+    diameter, leg_radius:*2;
+    origin, leg4_origin:;
+    direction, leg_vector:;
+};
+
+(child) color_leg1:
+{
+    class, ug_body;
+    feature, {leg_1:};
+    layer, 1;
+    color, ug_askClosestColor(leg_color:);
+};
+
+(child) color_leg2:
+{
+    class, ug_body;
+    feature, {leg_2:};
+    layer, 1;
+    color, ug_askClosestColor(leg_color:);
+};
+
+(child) color_leg3:
+{
+    class, ug_body;
+    feature, {leg_3:};
+    layer, 1;
+    color, ug_askClosestColor(leg_color:);
+};
+
+(child) color_leg4:
+{
+    class, ug_body;
+    feature, {leg_4:};
+    layer, 1;
+    color, ug_askClosestColor(leg_color:);
+};

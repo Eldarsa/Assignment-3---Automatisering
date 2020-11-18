@@ -45,22 +45,34 @@ class MyHandler(BaseHTTPRequestHandler):
 
         #Parse incoming parameters
         thePath = s.path
-        pname = "The Product name here"
-        theight = "Table height"
-        ttlenght = "Table top lenght"
+
+        pname = "Enter table name"
+        ttLenght = "Tabletop lenght"
+        ttWidth = "Tabletop width"
+        ttHeight = "Tabletop height"
+        legHeight = "Leg height"
+        legDiameter = "Leg diameter"
+
         if thePath.find("product_info") != -1:
         #Parse parameters.
         #/product_info?pname=Rocket&theight=8000&ttlenght=150
             split_by_q = thePath.split("?")
             param_str = split_by_q[1]
             key_value_pairs = param_str.split("&")
-            ##LAG LOOP SOM GÅR GJENNOM ALLE OG LEGGER DE INN I DICTIONARIES HELLER!
-            p1 = key_value_pairs[0].split("=")
-            p2 = key_value_pairs[1].split("=")
-            p3 = key_value_pairs[2].split("=")
-            pname = p1[1]
-            theight = p2[1]
-            ttlenght = p3[1]
+
+            key_value_dict = dict() #Save to dict so that it is easier to move around
+            for pair in key_value_pairs:
+                parts = pair.split("=")
+                key_value_dict[parts[0]] = parts[1]
+
+            pname = key_value_dict["pname"]
+            ttLenght = key_value_dict["ttLength"]
+            ttWidth = key_value_dict["ttWidth"]
+            ttHeight = key_value_dict["ttHeight"]
+            legHeight = key_value_dict["legHeight"]
+            legDiameter = key_value_dict["legDiameter"]
+
+            #MIGHT HAVE TO DO THE NEXT STEP HERE
 
         s.wfile.write(bytes("<p>Your accessed path: %s</p>" % s.path, "utf-8"))
 
@@ -69,12 +81,25 @@ class MyHandler(BaseHTTPRequestHandler):
         s.wfile.write(bytes('<body>', 'utf-8'))
         s.wfile.write(bytes('<h2>Products details</h2>', 'utf-8'))
         s.wfile.write(bytes('<form action="/product_info">', 'utf-8'))
+
         s.wfile.write(bytes('<label for="pname">Product name:</label><br>', 'utf-8'))
-        s.wfile.write(bytes('<input type="text" id="pname" name="pname" value="' + pname + '"><br>', 'utf-8'))
-        s.wfile.write(bytes('<label for="theight">Height (cm):</label><br>', 'utf-8'))
-        s.wfile.write(bytes('<input type="text" id="theight" name="theight" value="' + theight + '"><br>', 'utf-8'))
-        s.wfile.write(bytes('<label for="ttlenght">Top length (cm):</label><br>', 'utf-8'))
-        s.wfile.write(bytes('<input type="text" id="ttlenght" name="ttlenght" value="' + ttlenght + '"><br><br>', 'utf-8'))
+        s.wfile.write(bytes('<input type="text" id="pname" name="pname" value="' + pname + '"><br><br>', 'utf-8'))
+
+        s.wfile.write(bytes('<label for="ttLength">Tabletop length (cm):</label><br>', 'utf-8'))
+        s.wfile.write(bytes('<input type="text" id="ttLength" name="ttLength" value="'+ ttLenght +'"><br><br>', 'utf-8'))
+
+        s.wfile.write(bytes('<label for="ttWidth">Tabletop width (cm):</label><br>', 'utf-8'))
+        s.wfile.write(bytes('<input type="text" id="ttWidth" name="ttWidth" value="'+ ttWidth +'"><br><br>', 'utf-8'))
+
+        s.wfile.write(bytes('<label for="ttHeight">Tabletop height (cm):</label><br>', 'utf-8'))
+        s.wfile.write(bytes('<input type="text" id="ttHeight" name="ttHeight" value="' + ttHeight + '"><br><br>', 'utf-8'))
+
+        s.wfile.write(bytes('<label for="legHeight">Leg height (cm):</label><br>', 'utf-8'))
+        s.wfile.write(bytes('<input type="text" id="legHeight" name="legHeight" value="' + legHeight + '"><br><br>', 'utf-8'))
+
+        s.wfile.write(bytes('<label for="legDiameter">Leg diameter (cm):</label><br>', 'utf-8'))
+        s.wfile.write(bytes('<input type="text" id="legDiameter" name="legDiameter" value="' + legDiameter + '"><br><br>', 'utf-8'))
+
         s.wfile.write(bytes('<input type="submit" value="Submit">', 'utf-8'))
         s.wfile.write(bytes('</form>', 'utf-8'))
         s.wfile.write(bytes('<p>If you click the "Submit" button, the form-data will be sent to a page called "/product_info".</p>', 'utf-8'))
