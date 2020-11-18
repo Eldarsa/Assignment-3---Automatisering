@@ -6,6 +6,7 @@
 #******************************
 # https://wiki.python.org/moin/BaseHttpServer
 # https://www.w3schools.com/graphics/svg_intro.asp
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
 #import BaseHTTPServer
 import time
@@ -13,7 +14,7 @@ import requests
 import json
 
 HOST_NAME = '127.0.0.1' 
-PORT_NUMBER = 1234 # Maybe set this to 1234
+PORT_NUMBER = 1234 
 
 class Status():
     status = False
@@ -35,6 +36,7 @@ class MyHandler(BaseHTTPRequestHandler):
         s.send_response(200)
         s.send_header("Content-type", "text/html")
         s.end_headers()
+
     def do_GET(s):
         """Respond to a GET request."""
         s.send_response(200)
