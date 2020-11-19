@@ -55,12 +55,15 @@ class MyHandler(BaseHTTPRequestHandler):
         legHeight = "Leg height"
         legDiameter = "Leg diameter"
 
+        print("kommer vi her da?")
+        
         if thePath.find("product_info") != -1:
         #Parse parameters.
         #/product_info?pname=Rocket&theight=8000&ttlenght=150
             split_by_q = thePath.split("?")
             param_str = split_by_q[1]
             key_value_pairs = param_str.split("&")
+            
 
             key_value_dict = dict() #Save to dict so that it is easier to move around
             for pair in key_value_pairs:

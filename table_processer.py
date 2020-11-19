@@ -10,9 +10,13 @@ def process_table(param_dict):
     URL = "http://127.0.0.1:3030/kbe"
     requestor = kbe_requestor.kbe_requestor(URL)
 
+    print("kommer vi hit?")
     requestor.insert(param_dict)
+ 
     tableParams = requestor.select()
+    print("wohoo")
 
     writeDFA.write_DFA(template_path, tableParams)
+    print("Dette blir spennende")
     
     return
