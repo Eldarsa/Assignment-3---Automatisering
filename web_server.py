@@ -55,8 +55,8 @@ class MyHandler(BaseHTTPRequestHandler):
         legHeight = "Leg height"
         legDiameter = "Leg diameter"
 
-        print("kommer vi her da?")
-        
+
+
         if thePath.find("product_info") != -1:
         #Parse parameters.
         #/product_info?pname=Rocket&theight=8000&ttlenght=150
