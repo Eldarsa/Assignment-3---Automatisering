@@ -2,19 +2,29 @@ import web_server
 import writeDFA
 import kbe_requestor
 
-main()
+from http.server import BaseHTTPRequestHandler, HTTPServer
+#import BaseHTTPServer
+import time
+import requests
+import json
 
 def main():
 
     HOST_NAME = '127.0.0.1' 
     PORT_NUMBER = 1234 
 
-    #1. Setup servers
-    URL = "http://127.0.0.1:3030/kbe"
-    requestor = kbe_requestor(URL)
-    #2. When form submit:
-        #How can we do an action when the form submits??
-        #1. Post to Fuseki
-        #2. Get from Fuseki
-        #3. Make DFA file
+    server_class = HTTPServer
+    httpd = server_class((HOST_NAME, PORT_NUMBER), web_server.MyHandler)
+    print(time.asctime(), "Server Starts - %s:%s" % (HOST_NAME, PORT_NUMBER))
+
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    httpd.server_close()
+    print(time.asctime(), "Server Stops - %s:%s" % (HOST_NAME, PORT_NUMBER))
+
     return
+
+
+main()

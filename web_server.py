@@ -13,6 +13,8 @@ import time
 import requests
 import json
 
+import table_processer as tp
+
 HOST_NAME = '127.0.0.1' 
 PORT_NUMBER = 1234 
 
@@ -72,7 +74,10 @@ class MyHandler(BaseHTTPRequestHandler):
             legHeight = key_value_dict["legHeight"]
             legDiameter = key_value_dict["legDiameter"]
 
-            #MIGHT HAVE TO DO THE NEXT STEP HERE
+            #Send the dictionary to a function that processes the table, uploads it to Fuseki
+            #and creates a DFA file:
+            tp.process_table(key_value_dict)
+
 
         s.wfile.write(bytes("<p>Your accessed path: %s</p>" % s.path, "utf-8"))
 
