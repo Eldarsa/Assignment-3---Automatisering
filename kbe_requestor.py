@@ -11,7 +11,7 @@ if __name__ == "__main__":
     """
     #the dictionary that will be filled in
     param_dict = {
-    "pname": "",
+    "pname": "Ane",
     "ttLength": 0,
     "ttWidth": 0,
     "ttHeight": 0,
@@ -40,6 +40,18 @@ if __name__ == "__main__":
     data = r.json()
 
     #Saving the values in param_dict
+    tables = len(data['results']['bindings'])
+    #find the rigth table
+    index = 0
+    print("pname: ", param_dict["pname"])
+    for i in range(0,tables):
+        name = data['results']['bindings'][i]['table']['value'] #index -1 to get the last table that was created
+        name = name.split("#",1)[1]
+        print(name) 
+        if name == param_dict["pname"]:
+            index = i
+    
+    print("antall bord ", tables, "rikitg index ", index)
     pname = data['results']['bindings'][-1]['table']['value'] #index -1 to get the last table that was created
     param_dict['pname'] = pname
     ttLength = data['results']['bindings'][-1]['ttLength']['value']
@@ -97,7 +109,7 @@ class kbe_requestor():
 
         return
 
-    def select(self):
+    def select(self, b_pname):
 
         URL = self.baseURL + "/query"
         #the dictionary that will be filled in
@@ -127,23 +139,31 @@ class kbe_requestor():
         # sending get request and saving the response as response object 
         r = requests.get(url = URL, params = PARAMS) 
 
-        #Checking the result
         data = r.json()
 
+        tables = len(data['results']['bindings'])
+        #find the rigth table
+        index = 0
+        for i in range(0,tables):
+            name = data['results']['bindings'][i]['table']['value'] #index -1 to get the last table that was created
+            name = name.split("#",1)[1]
+            if name == b_pname:
+                index = i
+
+
         #Saving the values in param_dict
-        pname = data['results']['bindings'][0]['table']['value'] #index -1 to get the last table that was created
+        pname = data['results']['bindings'][index]['table']['value'] #index -1 to get the last table that was created
         pname = pname.split("#",1)[1] 
         param_dict['pname'] = pname
-        ttLength = data['results']['bindings'][0]['ttLength']['value']
-        print("ny")
+        ttLength = data['results']['bindings'][index]['ttLength']['value']
         param_dict['ttLength'] = int(ttLength)
-        ttWidth = data['results']['bindings'][0]['ttWidth']['value']
+        ttWidth = data['results']['bindings'][index]['ttWidth']['value']
         param_dict['ttWidth'] = int(ttWidth)
-        ttHeight = data['results']['bindings'][0]['ttheight']['value']
+        ttHeight = data['results']['bindings'][index]['ttheight']['value']
         param_dict['ttHeight'] = int(ttHeight)
-        legHeight = data['results']['bindings'][0]['legHeight']['value']
+        legHeight = data['results']['bindings'][index]['legHeight']['value']
         param_dict['legHeight'] = int(legHeight)
-        legDiameter =data['results']['bindings'][0]['legDiameter']['value']
+        legDiameter =data['results']['bindings'][index]['legDiameter']['value']
         param_dict['legDiameter'] = int(legDiameter)
 
         print("her kommer det nye params: \n", param_dict)

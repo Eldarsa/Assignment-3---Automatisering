@@ -12,7 +12,7 @@ def process_table(param_dict):
 
     requestor.insert(param_dict)
  
-    tableParams = requestor.select()
+    tableParams = requestor.select(param_dict["pname"])
 
     writeDFA.write_DFA(template_path, tableParams)
     
