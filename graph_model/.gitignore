@@ -1,0 +1,7 @@
+todo.md
+.vs/*
+x64/*
+node-graph.sln
+node-graph.vcxproj
+node-graph.vcxproj.filters
+node-graph.vcxproj.user

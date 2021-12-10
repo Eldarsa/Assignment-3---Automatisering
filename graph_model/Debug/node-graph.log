@@ -1,0 +1,9 @@
+﻿  idmanager.cpp
+  main.cpp
+  node.cpp
+  nodegraph.cpp
+  nodevariablecontainer.cpp
+  propertyTest.cpp
+  test1.cpp
+  Generating Code...
+  node-graph.vcxproj -> C:\Ecosim\node-graph\x64\Debug\node-graph.exe
